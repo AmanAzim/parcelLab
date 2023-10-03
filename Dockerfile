@@ -11,6 +11,7 @@ RUN npm ci
 COPY . .
 #copy each and every files except dockerignore ones from local app dir to /usr/src/app inside docker
 
-EXPOSE 5000
+EXPOSE 4000
 
-CMD ["node" "server.js"]
+#CMD ["node" "server.js"]
+CMD ["node" "start"]

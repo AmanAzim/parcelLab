@@ -5,9 +5,9 @@ services:
     build: . # because im using my own image: parcel-lab-app that is why we need to build but if we have used image: node which is prebuilt then we didn't need the build command
     command: "npm start"
     ports:
-      - "5000:5000"
+      - "4000:5000"
     volumes:
-      - .:/usr/src/app
+      - .:/usr/src/app # has to be same as Dockerfile workdir. It is mapping the current path of the local mechine to /usr/src/app that enables nodemon to pickup any local changes
     depends_on:
       - "parcel_lab_db"
     environment:
@@ -18,7 +18,7 @@ services:
   parcel_lab_db:
     image: "mongo"
     restart: always
-    ports:
+    ports: # without this the db will run but we cannot connect to it locally using compas
       - "27017:27017"
     volumes:
       - mongo-data:/data/db # name of the volume can be anything but /data/db has to be the same because by default inside docker mongo container mongo db always saves everyting there
