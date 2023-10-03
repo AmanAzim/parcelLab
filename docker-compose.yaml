@@ -1,8 +1,8 @@
-version: '3'
+version: "3"
 services:
   parcel-lab-app:
-    image: "parcel-lab-app"
-    build: .
+    image: parcel-lab-app
+    build: . # because im using my own image: parcel-lab-app that is why we need to build but if we have used image: node which is prebuilt then we didn't need the build command
     command: "npm start"
     ports:
       - "5000:5000"
@@ -10,12 +10,17 @@ services:
       - .:/usr/src/app
     depends_on:
       - "parcel_lab_db"
-  
+    environment:
+      LISTEN_HOST: 0.0.0.0
+      LISTEN_PORT: 5000
+      MONGO_DB_URL: "mongodb://parcel_lab_db:27017/data"
+
   parcel_lab_db:
     image: "mongo"
+    restart: always
     ports:
       - "27017:27017"
     volumes:
-      - mongo-data:/data/db
+      - mongo-data:/data/db # name of the volume can be anything but /data/db has to be the same because by default inside docker mongo container mongo db always saves everyting there
 volumes:
   mongo-data:

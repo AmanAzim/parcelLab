@@ -4,7 +4,6 @@ This REST API application have 2 routes:
 2. provides weather information when queried by the latitude and longitude of a GPS location. If the information is not available in the database then it is fetched from https://openweathermap.org/ and stored in the database for future. 
 
 ## Prepare the app to run
-* ```npm install```
 * ```docker-compose build```
 
 ## Running Application Locally (You can use Postman to make requests)
